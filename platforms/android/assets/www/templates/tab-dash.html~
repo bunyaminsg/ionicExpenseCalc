@@ -1,0 +1,41 @@
+<ion-view view-title="Expences">
+  <ion-content class="padding">
+  </ion-content>
+  <button class="button button-balanced button-circle bottom-right-fixed icon ion-plus"></button>
+</ion-view>
+
+<script id="new-expence.html" type="text/ng-template">
+
+<div class="modal">
+
+  <!-- Modal header bar -->
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">New Expence</h1>
+    <button class="button button-clear button-positive" ng-click="closeNewExpence()">Cancel</button>
+  </ion-header-bar>
+
+  <!-- Modal content area -->
+  <ion-content>
+
+    <form ng-submit="createExpence(expence)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Expence" required="true" ng-model="expence.title">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Category" ng-model="expence.category" style="resize: none;"></input>
+        </label>
+        <label class="item item-input">
+          <input type="number" placeholder="Value" ng-model="expence.value" style="resize: none;"></input>
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Create</button>
+      </div>
+    </form>
+
+  </ion-content>
+
+</div>
+
+</script>

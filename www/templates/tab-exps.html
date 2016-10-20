@@ -1,0 +1,57 @@
+<ion-view view-title="Expenses">
+
+
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item ng-repeat="exp in todayExpenses">
+        <span style="float: left">{{exp.name}}</span>
+        <span style="float: right">{{exp.amount}} TL</span>
+        <ion-option-button class = "button-assertive icon ion-trash-b" ng-click="removeExpense(exp)"></ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+
+
+
+
+  <button class="button button-balanced button-circle bottom-right-fixed icon ion-plus" ng-click="newExpense()"></button>
+  <script id="new-expense.html" type="text/ng-template">
+
+    <div class="modal">
+
+      <!-- Modal header bar -->
+      <ion-header-bar class="bar-secondary">
+        <h1 class="title">New Expense</h1>
+        <button class="button button-clear button-positive" ng-click="closeNewExpense()">Cancel</button>
+      </ion-header-bar>
+
+      <!-- Modal content area -->
+      <ion-content>
+
+        <form ng-submit="createExpense(expense)">
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="Name" required="true" ng-model="expense.name">
+            </label>
+            <label class="item item-input">
+              <input type="text" placeholder="Category" ng-model="expense.category" style="resize: none;">
+            </label>
+            <label class="item item-input">
+              <input type="number" placeholder="Value" ng-model="expense.value" style="resize: none;">
+            </label>
+          </div>
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Create</button>
+          </div>
+        </form>
+
+      </ion-content>
+
+    </div>
+
+  </script>
+</ion-view>
+
+
+

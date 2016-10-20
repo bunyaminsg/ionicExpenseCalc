@@ -1,0 +1,14 @@
+<ion-view view-title="Dashboard">
+  <ion-content>
+  	<ion-list ng-repeat="cats in categories">
+  		<ion-item>
+  			<button class="button button-positive button-full" ng-click="getCategories()">
+				Refresh
+			</button>
+  		</ion-item>
+  		<ion-item ng-repeat="cat in cats.categories">
+  		  {{cat}}
+  		</ion-item>
+  	</ion-list>
+  </ion-content>
+</ion-view>
