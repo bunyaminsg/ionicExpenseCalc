@@ -7,7 +7,10 @@
 			</button>
   		</ion-item>
   		<ion-item ng-repeat="cat in cats.categories">
-  		  {{cat}}
+  		  	<span style="float:left;">{{cat}}</span> <span style="float: right;">{{categoryTotals[cat]}} TL</span>
+  		</ion-item>
+  		<ion-item>
+  		<strong><span style="float:left;">Total: </span> <span style="float: right;">{{total}} TL</span></strong>
   		</ion-item>
   	</ion-list>
   </ion-content>

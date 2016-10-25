@@ -17,6 +17,9 @@ angular.module('starter.services', [])
     delete: function(__id) {
       return $resource('http://146.185.136.134:8080/api/:id',{id: __id},{'delete': {method:'DELETE'}});
     },
+    total: function(_category){
+      return $resource('http://146.185.136.134:8080/api/total/:category',{category: _category},{'query': {method:'GET'}});
+    },
     filter: function() {
       return $resource('http://146.185.136.134:8080/api/filter',{'save':   {method:'POST'}});
     },

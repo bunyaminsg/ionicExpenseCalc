@@ -78,11 +78,31 @@ angular.module('starter.controllers', [])
   $scope.getCategories = function () {
     Expenses.categories().query(function(result){
           $scope.categories = result;
+          if(result.length>0)
+            $scope.getCategoryTotals();
         }, function(error){
           $scope.categories = [];
         });
   }
   $scope.getCategories();
+  $scope.categoryTotals = {};
+  $scope.getCategoryTotals = function(){
+    console.log("here");
+    for(var i=0;i<$scope.categories[0].categories.length;i++){
+      Expenses.total($scope.categories[0].categories[i]).query(function(result){
+        console.log(result);
+        $scope.categoryTotals[result.category] = result.total;
+        $scope.calcTotal();
+      });
+    }
+  }
+  $scope.total = 0;
+  $scope.calcTotal = function(){
+    $scope.total = 0;
+    for(var key in $scope.categoryTotals){
+      $scope.total += $scope.categoryTotals[key];
+    }
+  }
 })
 
 .controller('SettingsCtrl', function($scope, Expenses, $cordovaFile) {
