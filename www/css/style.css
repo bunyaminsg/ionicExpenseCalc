@@ -12,3 +12,14 @@
   right:10px;
   bottom: 70px;
 }
+
+.cat-per{
+	display: inline-block;
+	height: 10px;
+}
+
+.cat-wch{
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+}

@@ -93,6 +93,18 @@ angular.module('starter.controllers', [])
         console.log(result);
         $scope.categoryTotals[result.category] = result.total;
         $scope.calcTotal();
+        $scope.calcPercent();
+      });
+    }
+  }
+  $scope.categoryPercentage = [];
+  $scope.calcPercent = function(){
+    $scope.categoryPercentage = [];
+    for(var key in $scope.categoryTotals){
+      $scope.categoryPercentage.push({ 
+        name: key,
+        per: Math.round((parseFloat($scope.categoryTotals[key])/$scope.total)*100)/100.0,
+        col: "rgb(" + parseInt(Math.random()*255) + "," + parseInt(Math.random()*255) + "," + parseInt(Math.random()*255) + ")"
       });
     }
   }

@@ -2,6 +2,13 @@
   <ion-content>
   	<ion-list ng-repeat="cats in categories">
   		<ion-item>
+  			<div ng-repeat="ctg in categoryPercentage | orderBy:'-per'" ng-style="{ 'width': (ctg.per*100) + '%' , 'background-color': ctg.col }"
+ class="cat-per"></div>
+  			<div ng-repeat="ctg in categoryPercentage | orderBy:'-per'">
+  				<div ng-style="{ 'background-color': ctg.col }" class="cat-wch"></div> <strong>{{ctg.name}}:</strong> {{ctg.per*100}}% 
+  			</div>
+  		</ion-item>
+  		<ion-item>
   			<button class="button button-positive button-full" ng-click="getCategories()">
 				Refresh
 			</button>
