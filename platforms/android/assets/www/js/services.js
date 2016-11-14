@@ -5,6 +5,9 @@ angular.module('starter.services', [])
     all: function() {
       return $resource('http://146.185.136.134:8080/api/allExpenses',{'query': { method: 'GET' }});
     },
+    allTime: function() {
+      return $resource('http://146.185.136.134:8080/api/showAllTime',{'query': { method: 'GET' }});
+    },
     today: function() {
       return $resource('http://146.185.136.134:8080/api/todayExpenses',{'query': { method: 'GET' }});
     },

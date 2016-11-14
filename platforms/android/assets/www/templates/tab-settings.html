@@ -1,5 +1,17 @@
-<ion-view view-title="Account">
+<ion-view view-title="All Expenses">
   <ion-content>
-    
+    <ion-list>
+    	<ion-item>
+  			<button class="button button-positive button-full" ng-click="getAllExp()">
+				Refresh
+			</button>
+  		</ion-item>
+  		<ion-item ng-repeat="exp in allTimeExpenses">
+  		  	<span style="float:left;">{{exp._id.name}}</span> <span style="float: right;">{{exp.amount}} TL</span>
+  		</ion-item>
+  		<ion-item>
+  		<strong><span style="float:left;">Total: </span> <span style="float: right;">{{total}} TL</span></strong>
+  		</ion-item>
+  	</ion-list>
   </ion-content>
 </ion-view>

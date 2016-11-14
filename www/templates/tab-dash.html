@@ -2,10 +2,27 @@
   <ion-content>
   	<ion-list ng-repeat="cats in categories">
   		<ion-item>
-  			<div ng-repeat="ctg in categoryPercentage | orderBy:'-per'" ng-style="{ 'width': (ctg.per*100) + '%' , 'background-color': ctg.col }"
- class="cat-per"></div>
+  			<svg style="height:300px;" ng-init="r=0">
+  			  <!--
+  			  <g transform="rotate(0,150,150)">
+			  	<path id="arc1" fill="none" stroke="#446688" stroke-width="20" d="{{d1}}"/>
+			  </g>
+			  <g transform="rotate(40,150,150)">
+			    <path id="arc2" fill="none" stroke="#886644" stroke-width="20" d="{{d2}}"/>
+			  </g>
+			  <g transform="rotate(100,150,150)">
+			    <path id="arc3" fill="none" stroke="#668844" stroke-width="20" d="{{d3}}"/>
+			  </g>-->
+			  
+			  <g ng-repeat="ctg in categoryPercentage | orderBy:'-per'" ng-attr-transform="rotate({{ctg.r}},150,150)">
+			  	<path fill="none" stroke="{{ctg.col}}" stroke-width="20" d="{{describeArc(150, 150, 100, 0, (ctg.per*360))}}"/>
+			  </g>
+			</svg>
+
+  			<!--<div ng-repeat="ctg in categoryPercentage | orderBy:'-per'" ng-style="{ 'width': (ctg.per*100) + '%' , 'background-color': ctg.col }"
+ class="cat-per"></div>-->
   			<div ng-repeat="ctg in categoryPercentage | orderBy:'-per'">
-  				<div ng-style="{ 'background-color': ctg.col }" class="cat-wch"></div> <strong>{{ctg.name}}:</strong> {{ctg.per*100}}% 
+  				<div ng-style="{ 'background-color': ctg.col, 'width': (ctg.per*100) + '%' }" class="cat-wch"></div> <strong>{{ctg.name}}:</strong> {{ctg.per*100}}% 
   			</div>
   		</ion-item>
   		<ion-item>

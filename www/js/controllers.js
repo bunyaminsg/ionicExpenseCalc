@@ -75,6 +75,34 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DashCtrl', function($scope, Expenses) {
+  $scope.polarToCartesian= function(centerX, centerY, radius, angleInDegrees) {
+    var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+
+    return {
+      x: centerX + (radius * Math.cos(angleInRadians)),
+      y: centerY + (radius * Math.sin(angleInRadians))
+    };
+  }
+
+  $scope.describeArc = function(x, y, radius, startAngle, endAngle){
+
+      var start = $scope.polarToCartesian(x, y, radius, endAngle);
+      var end = $scope.polarToCartesian(x, y, radius, startAngle);
+
+      var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+      var d = [
+          "M", start.x, start.y, 
+          "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+      ].join(" ");
+
+      return d;       
+  }
+
+  $scope.d1 = $scope.describeArc(150, 150, 100, 0, 40);
+  $scope.d2 = $scope.describeArc(150, 150, 100, 0, 60);
+  $scope.d3 = $scope.describeArc(150, 150, 100, 0, 60);
+
   $scope.getCategories = function () {
     Expenses.categories().query(function(result){
           $scope.categories = result;
@@ -107,6 +135,14 @@ angular.module('starter.controllers', [])
         col: "rgb(" + parseInt(Math.random()*255) + "," + parseInt(Math.random()*255) + "," + parseInt(Math.random()*255) + ")"
       });
     }
+    $scope.categoryPercentage.sort(function(a, b) {
+        return parseFloat(b.per) - parseFloat(a.per);
+    });
+    var r=0;
+    for(var i=0;i<$scope.categoryPercentage.length;i++){
+      $scope.categoryPercentage[i].r = r;
+      r += ($scope.categoryPercentage[i].per * 360);
+    }
   }
   $scope.total = 0;
   $scope.calcTotal = function(){
@@ -122,9 +158,27 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 
-  $scope.exportJSON = function () {
+  $scope.allTimeExpenses = [];
+  $scope.total = 0;
+
+  $scope.getAllExp = function(){  
+    Expenses.allTime().query(function(result){
+      console.log("result",result);
+      $scope.allTimeExpenses = result;
+      $scope.total = 0;
+      for (var i = $scope.allTimeExpenses.length - 1; i >= 0; i--) {
+        $scope.total += $scope.allTimeExpenses[i].amount;
+      }
+    });
+  };
+
+  $scope.getAllExp();
+
+  /*$scope.exportJSON = function () {
     $scope.exps = Expenses.all();
     $cordovaFile.createFile(cordova.file.externalDataDirectory,"Expenses.json",true);
     $cordovaFile.writeExistingFile(cordova.file.externalDataDirectory, "Expenses.json", Expenses.all().stringify());
-  }
+  }*/
+
+
 });
